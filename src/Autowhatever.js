@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import createSectionIterator from 'section-iterator';
 import themeable from 'react-themeable';
 import SectionTitle from './SectionTitle';
+import SectionContainer from './SectionContainer';
 import ItemsList from './ItemsList';
 
 const emptyObject = {};
@@ -36,6 +37,7 @@ export default class Autowhatever extends Component {
     renderItem: PropTypes.func,           // This function renders a single item.
     renderItemData: PropTypes.object,     // Arbitrary data that will be passed to renderItem()
     renderSectionTitle: PropTypes.func,   // This function gets a section and renders its title.
+    renderSectionContainer: PropTypes.func, // This function gets a section and renders it.
     getSectionItems: PropTypes.func,      // This function gets a section and returns its items, which will be passed into `renderItem` for rendering.
     containerProps: PropTypes.object,     // Arbitrary container props
     inputProps: PropTypes.object,         // Arbitrary input props
@@ -163,7 +165,7 @@ export default class Autowhatever extends Component {
 
     const { theme } = this;
     const {
-      id, items, renderItem, renderItemData, renderSectionTitle,
+      id, items, renderItem, renderItemData, renderSectionTitle, renderSectionContainer,
       highlightedSectionIndex, highlightedItemIndex, itemProps
     } = this.props;
 
@@ -171,11 +173,12 @@ export default class Autowhatever extends Component {
       const keyPrefix = `react-autowhatever-${id}-`;
       const sectionKeyPrefix = `${keyPrefix}section-${sectionIndex}-`;
       const isFirstSection = (sectionIndex === 0);
+      const themeProps = theme(`${sectionKeyPrefix}container`, 'sectionContainer', isFirstSection && 'sectionContainerFirst');
 
       // `key` is provided by theme()
       /* eslint-disable react/jsx-key */
       return (
-        <div {...theme(`${sectionKeyPrefix}container`, 'sectionContainer', isFirstSection && 'sectionContainerFirst')}>
+        <SectionContainer section={section} renderSectionContainer={renderSectionContainer} themeProps={themeProps}>
           <SectionTitle
             section={section}
             renderSectionTitle={renderSectionTitle}
@@ -195,7 +198,7 @@ export default class Autowhatever extends Component {
             keyPrefix={keyPrefix}
             ref={this.storeItemsListReference}
           />
-        </div>
+        </SectionContainer>
       );
       /* eslint-enable react/jsx-key */
     });
@@ -360,3 +363,5 @@ export default class Autowhatever extends Component {
     );
   }
 }
+
+Autowhatever.toto = 'tutu';
