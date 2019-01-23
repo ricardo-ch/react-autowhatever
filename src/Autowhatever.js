@@ -178,7 +178,7 @@ export default class Autowhatever extends Component {
       // `key` is provided by theme()
       /* eslint-disable react/jsx-key */
       return (
-        <SectionContainer section={section} renderSectionContainer={renderSectionContainer} themeProps={themeProps}>
+        <SectionContainer key={section.id} section={section} renderSectionContainer={renderSectionContainer} themeProps={themeProps}>
           <SectionTitle
             section={section}
             renderSectionTitle={renderSectionTitle}
