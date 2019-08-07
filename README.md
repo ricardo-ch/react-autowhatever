@@ -7,6 +7,10 @@
 
 Accessible rendering layer for Autosuggest and Autocomplete components.
 
+
+## Ricardo Fork
+This project has been forked to be able to render a custom wrapper for each section of the autocomplete
+
 ## Demo
 
 Check out the [Homepage](http://react-autowhatever.js.org) and the [Codepen examples](http://codepen.io/collection/nmZqgW).
