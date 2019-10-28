@@ -94,22 +94,20 @@ export default class Autowhatever extends Component {
     this.ensureHighlightedItemIsVisible();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.items !== this.props.items) {
-      this.setSectionsItems(nextProps);
-    }
-
-    if (nextProps.items !== this.props.items || nextProps.multiSection !== this.props.multiSection) {
-      this.setSectionIterator(nextProps);
-    }
-
-    if (nextProps.theme !== this.props.theme) {
-      this.setTheme(nextProps);
-    }
-  }
-
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     this.ensureHighlightedItemIsVisible();
+
+    if (prevProps.items !== this.props.items) {
+      this.setSectionsItems(this.props);
+    }
+
+    if (prevProps.items !== this.props.items || prevProps.multiSection !== this.props.multiSection) {
+      this.setSectionIterator(this.props);
+    }
+
+    if (prevProps.theme !== this.props.theme) {
+      this.setTheme(this.props);
+    }
   }
 
   setSectionsItems(props) {
